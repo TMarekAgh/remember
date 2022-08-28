@@ -1,0 +1,32 @@
+<div class="module__hub__container">
+
+  <h2 class="module__hub__header text center no-wrap nh-padding-m">MODULES</h2>
+
+  <div class="module__hub">
+
+    <a href="/grapher" class="module__item__container">
+
+      <mat-card
+        class="module__card"
+        *ngFor="let module of modules">
+
+        <mat-icon
+          class="module__card__icon"
+          aria-hidden="false"
+          aria-label="Example home icon">
+          scatter_plot
+        </mat-icon>
+
+        <mat-card-title>
+          {{ module.name }}
+        </mat-card-title>
+
+        <mat-card-content>
+          <p>{{ module.description }}</p>
+        </mat-card-content>
+
+      </mat-card>
+
+    </a>
+  </div>
+</div>

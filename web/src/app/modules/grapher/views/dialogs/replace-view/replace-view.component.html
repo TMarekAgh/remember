@@ -1,0 +1,57 @@
+<div  mat-dialog-title class="nh-dialog-title">
+  <h1>Replace View</h1>
+
+  <div mat-dialog-actions>
+
+    <button
+      mat-icon-button
+      (click)="create()"
+      matTooltip="Replace">
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      matTooltip="Cancel">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div mat-dialog-content class="nh-dialog-content">
+
+  <form class="flex column">
+
+    <div class="flex row align-items-center justify-evenly">
+
+      <button
+        type="button"
+        class="nh-card large"
+        mat-button
+        (click)="fileInput.click()">
+        {{ filename ? filename : 'Choose File' }}
+      </button>
+
+      <input
+        #fileInput
+        hidden
+        (change)="onFileSelected($event)"
+        type="file"
+        name="file"
+        accept="text/html"
+        id="file">
+
+      <p class="text no-margin">Or</p>
+
+      <button
+        mat-button
+        class="nh-card large"
+        (click)="openEditor()">
+        Create with editor
+      </button>
+
+    </div>
+  </form>
+</div>

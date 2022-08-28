@@ -1,0 +1,67 @@
+<div class="graph__container" [@blockChildren]>
+
+  <div class="graph__content">
+
+    <div
+      class="graph__toolbar__menu"
+      [@foldInOutHorizontal]
+      [style.width.px]="menuWidth"
+      *ngIf="nodeMenuExtended">
+      <app-graph-menu
+        [node]="nodeService.state.currentNode"
+        [activeNode]="nodeService.state.activeNode!"
+        (onNavigateToNode)="nodeService.state.nodeClicked($event)">
+      </app-graph-menu>
+    </div>
+
+    <div class="graph__viewer__container">
+
+      <app-graph-viewer
+        [node]="nodeService.state.currentNode"
+        [activeNode]="nodeService.state.activeNode!"
+        [navigator]="nodeService.state.navigator"
+        (nodeClicked)="nodeService.state.nodeClicked($event)"
+        (navigateToNode)="nodeService.state.navigateToNode($event)"
+        [links]="nodeService.state.currentNode?.links ?? []"
+        [parents]="nodeService.state.currentNode?.parents ?? []"
+        [children]="nodeService.state.currentNode?.children ?? []">
+
+        <app-resizer
+          class="graph__viewer__resizer__left"
+          (onStepChange)="onMenuResizerChange($event)"
+          (onResizerDrag)="onMenuResizerDrag($event)"
+          [initialStep]="2"
+          [direction]="ResizerDirection.Right"
+          [position]="ResizerPosition.Left">
+        </app-resizer>
+
+        <app-resizer
+          class="graph__viewer__resizer__right"
+          (onStepChange)="onContentResizerChange($event)"
+          (onResizerDrag)="onContentResizerDrag($event)"
+          [initialStep]="2"
+          [direction]="ResizerDirection.Left"
+          [position]="ResizerPosition.Right">
+        </app-resizer>
+
+      </app-graph-viewer>
+
+    </div>
+
+    <!-- Here goes splitter(section resizer) -->
+
+    <div
+      class="content__viewer__container"
+      [@foldInOutHorizontal]
+      [style.width.px]="contentWidth"
+      *ngIf="nodeContentExtended">
+
+      <app-content-viewer [node]="nodeService.state.activeNode">
+
+      </app-content-viewer>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+.resizer__container
+  height: 100%
+  position: relative
+  // width: 3px
+  // background: #757575
+
+.resizer
+  width: 5px
+  height: 100%
+  position: absolute
+  cursor: ew-resize
+  background: #e0e0e0
+
+  &.left
+    left: 0
+
+  &.right
+    right: 0
+
+.resizer__actions
+  color: #fafafa
+  top: 50%
+  position: absolute
+  display: flex
+  transform: translate(-50%, 0)
+
+  .resizer__action
+    background: #212121
+    width: 20px
+    min-width: 20px
+    padding: 0
+
+    &.left
+     border-radius: 4px 0 0 4px
+
+    &.right
+     border-radius: 0 4px 4px 0
+
+    .resizer__action__icon
+      width: 20px
+
+  .resizer__action__pad
+    width: 20px
+    height: 100%

@@ -1,0 +1,249 @@
+<div class="editor__container">
+  <div mat-dialog-title class="nh-dialog-title">
+    <h1>
+      Editor
+    </h1>
+
+    <div mat-dialog-actions>
+
+      <button
+        mat-icon-button
+        matTooltip="Save View"
+        (click)="save()">
+        <mat-icon>done</mat-icon>
+      </button>
+
+      <button
+        mat-button
+        matTooltip="Cancel creation"
+        mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+
+    </div>
+  </div>
+
+  <div class="editor__workspace">
+
+    <div class="editor__toolbar">
+
+      <mat-slide-toggle [(ngModel)]="preview">Preview</mat-slide-toggle>
+
+    </div>
+
+      <div
+        #workspace
+        class="workspace"
+        data-remember-view>
+
+        <div *ngIf="elementSelectionVisible" class="overlay remove">
+
+          <div class="overlay__background" (click)="hideElementSelection()"></div>
+
+          <div
+            *ngIf="elementSelectionVisible"
+            class="element__selection">
+            <button mat-button (click)="insertElement($event, 'header', tempIndex)">Header</button>
+            <button mat-button (click)="insertElement($event, 'paragraph', tempIndex)">Paragraph</button>
+            <button mat-button (click)="insertElement($event, 'list', tempIndex)">List</button>
+            <button mat-button (click)="insertElement($event, 'image', tempIndex)">Image</button>
+          </div>
+        </div>
+
+        <p class="remove" contenteditable="false" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)" *ngIf="this.elements.length < 1">
+          Add elements to start editing a view
+        </p>
+
+        <div class="splitter remove" contenteditable="false" *ngIf="!preview">
+          <mat-divider></mat-divider>
+          <div class="splitter__options">
+            <button
+              mat-icon-button
+              class="mat-button mat-button-base"
+              disableRipple
+              type="button"
+              (click)="showElementSelection(0)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <ng-container *ngFor="let element of elements; let index=index;">
+          <ng-container [ngSwitch]="element.type">
+
+            <div
+              class="nh-section-header element"
+              *ngSwitchCase="'header'"
+              data-element
+              data-type="header">
+
+              <h2
+                class="nh-section-header-primary"
+                [(ngModel)]="element.value"
+                [name]="'element_' + index"
+                contenteditable="true"
+                data-value>
+                {{ element.value }}
+              </h2>
+
+
+              <div
+                class="element__options remove"
+                contenteditable="false"
+                *ngIf="!preview">
+                <button
+                  mat-icon-button
+                  class="mat-button mat-button-base"
+                  disableRipple
+                  type="button"
+                  (click)="removeElement(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+            </div>
+
+            <ng-container *ngSwitchCase="'paragraph'">
+              <div
+                class="element"
+                data-element
+                data-type="paragraph">
+                <p
+                  class="element"
+                  [(ngModel)]="element.value"
+                  [name]="'element_' + index"
+                  contenteditable
+
+                  data-value>
+                  {{ element.value }}
+                </p>
+
+                <div
+                  class="element__options remove"
+                  contenteditable="false"
+                  *ngIf="!preview">
+                  <button
+                    mat-icon-button
+                    class="mat-button mat-button-base"
+                    disableRipple
+                    type="button"
+                    (click)="removeElement(element)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+              </div>
+            </ng-container>
+
+
+            <div
+              *ngSwitchCase="'list'"
+              class="nh-list element"
+              data-element
+              data-type="list">
+
+              <div
+                class="element__options remove"
+                contenteditable="false"
+                *ngIf="!preview">
+
+                <button
+                  mat-icon-button
+                  class="mat-button mat-button-base"
+                  disableRipple
+                  type="button"
+                  (click)="removeElement(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+              </div>
+
+              <div
+                *ngFor="let item of element.items; let i = index"
+                class="nh-list-item"
+                data-type="list-item">
+
+                <p
+                  contenteditable="true"
+                  [name]="'element_' + index + '_' + i"
+                  [(ngModel)]="item.value"
+                  data-value>
+                  {{ item.value }}
+                </p>
+
+                <button
+                  class="remove"
+                  mat-icon-button
+                  (click)="removeListItem(element, item)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+              </div>
+
+              <div
+                class="nh-list-item remove"
+                data-type="list-item">
+
+                <button
+                  mat-button
+                  class="mat-button mat-button-base"
+                  disableRipple
+                  type="button"
+                  (click)="addListItem(element)">
+                  <mat-icon>add</mat-icon>
+                </button>
+
+              </div>
+
+            </div>
+
+            <div
+              *ngSwitchCase="'image'"
+              class="element image__container"
+              data-type="image"
+              data-element>
+
+              <img class="default__image" data-value [src]="element.value"/>
+
+              <div class="element__options remove" contenteditable="false" *ngIf="!preview">
+
+                <button
+                  mat-icon-button
+                  class="mat-button mat-button-base"
+                  disableRipple
+                  type="button"
+                  (click)="editElement(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button
+                  mat-icon-button
+                  class="mat-button mat-button-base"
+                  disableRipple
+                  type="button"
+                  (click)="removeElement(element)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+
+              </div>
+            </div>
+
+            <div class="splitter remove" contenteditable="false" *ngIf="!preview">
+              <mat-divider></mat-divider>
+              <div class="splitter__options">
+                <button
+                  mat-icon-button
+                  class="mat-button mat-button-base"
+                  disableRipple
+                  type="button"
+                  (click)="showElementSelection(index + 1)">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+
+          </ng-container>
+        </ng-container>
+      </div>
+  </div>
+</div>

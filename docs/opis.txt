@@ -1,0 +1,16 @@
+Praca inżynierska pod tytułem "System do kategoryzacji danych" zgłębia tematykę problemu kategoryzacji danych, wyszczególniając założenia potrzebne do jego rozwiązania oraz wady istniejących systemów adresujących ten problem.
+Opisuje procesy projektowania oraz implementacji uniwersalnego systemu kategoryzacji danych spełniającego założenia wymagane do rozwiązania problemu oraz adresującego wady istniejących rozwiązań.
+Głównymi założeniami systemu są jego uniwersalność, przystępność dla użytkowników o różnych poziomach zaawansowania oraz wizualizacja danych w strukturze grafowej.
+Sekcja poświęcona projektowania zawiera w szczególności główne koncepcje oraz wysokopoziomową architekturę systemu.
+Sekcja poświęcona implementacji argumentuje wybór poszczególnych technologii oraz opisuje najciekawsze problemy oraz kwestie napotkane przy implementacji systemu.
+Przedstawiona jest także aplikacja będąca rezultatem przeprowadzonych prac.
+Zakończenie zawiera podsumowanie omawiające stopień realizacji przyjętych założeń, możliwości dalszego rozwoju systemu oraz wnioski wysnute w procesie jego realizacji, testowania i użytkowania. systemu.
+
+Thesis named "A system for data categorization" delves into the topic of data categorization problem, detailing assumptions needed for it's resolving and downsides of existing systems addresing this problem.
+Describes design and implementation processes of an universal data categorization system fulfilling assumptions required for it's resolvance and addressing downsides of existing solutions.
+Main assumptions of the system are it's versatility, approachability to the users of differing levels of advancement and data visualization in graph like structure.
+Section dedicated to design contains main concepts of the system and high level infrastructure.
+Section dedicated to implementation arguments the choice of technologies and describes the most interesting problems and points encountered during system's implementation.
+There is also a section dedicated to presentation of resulting application.
+The ending section contains summary discussing the degree of completion of initial assumptions, the possibility of further development and conclusions drawn in the process of realization, testing and usage of the system.
+

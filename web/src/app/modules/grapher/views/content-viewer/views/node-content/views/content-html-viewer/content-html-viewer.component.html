@@ -1,0 +1,17 @@
+<div class="html__viewer__container">
+
+  <iframe
+    name="html_content"
+    (load)="onIFrameLoaded()"
+    [src]="url"
+    class="html__viewer__iframe"
+    scrolling="auto">
+  </iframe>
+
+  <app-loader
+    [visible]="loading"
+    [fixed]="true"
+    [background]="true">
+  </app-loader>
+
+</div>

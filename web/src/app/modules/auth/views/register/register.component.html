@@ -1,0 +1,76 @@
+<mat-card class="register__container">
+
+  <mat-card-title class="text center nh-padding-m">Sign up</mat-card-title>
+
+  <mat-card-content>
+
+    <form class="flex column" [formGroup]="registerForm">
+
+      <mat-form-field class="block nh-padding-m-b">
+        <mat-label>Username</mat-label>
+
+        <input
+          matInput
+          formControlName="username"
+          autocomplete="off">
+
+      </mat-form-field>
+
+      <mat-form-field class="block nh-padding-m-b">
+        <mat-label>Display Name</mat-label>
+
+        <input
+          matInput
+          formControlName="displayName"
+          autocomplete="off">
+
+      </mat-form-field>
+
+      <mat-form-field class="block nh-padding-m-b">
+        <mat-label>Email</mat-label>
+
+        <input
+          matInput
+          formControlName="email"
+          autocomplete="off">
+
+      </mat-form-field>
+
+      <mat-form-field class="block nh-padding-m-b">
+        <mat-label>Password</mat-label>
+
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          autocomplete="off">
+
+      </mat-form-field>
+
+      <mat-form-field class="block nh-padding-m-b">
+        <mat-label>Confirm Password</mat-label>
+
+        <input
+          matInput
+          type="password"
+          formControlName="repeat_password">
+
+      </mat-form-field>
+
+      <button
+        mat-button
+        class="block"
+        (click)="register()"
+        [disabled]="!registerForm.valid && registerForm.dirty">
+        Sign up
+      </button>
+
+      <button mat-button  [routerLink]="'/auth/login'">
+        Already have an account? Sign in
+      </button>
+
+    </form>
+
+  </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,33 @@
+@use '@angular/material' as mat
+
+$themeDefinition: ( color: ( primary: mat.$gray-palette, accent: mat.$gray-palette ))
+
+$theme: mat.define-dark-theme($themeDefinition)
+$lightTheme: mat.define-light-theme($themeDefinition)
+
+@include mat.core()
+
+@include mat.core-theme($theme)
+@include mat.all-component-themes($theme)
+@include mat.button-theme($theme)
+
+.light
+  @include mat.core-theme($lightTheme)
+  @include mat.all-component-themes($lightTheme)
+  @include mat.button-theme($lightTheme)
+
+// Palette
+// 50: #fafafa,
+// 100: #f5f5f5,
+// 200: #eeeeee,
+// 300: #e0e0e0,
+// 400: #bdbdbd,
+// 500: #9e9e9e, //lightgray
+// 600: #757575, //gray
+// 700: #616161,
+// 800: #424242, //darkgray
+// 900: #212121, //black
+// A100: #ffffff,
+// A200: #eeeeee,
+// A400: #bdbdbd,
+// A700: #616161,

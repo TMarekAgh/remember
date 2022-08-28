@@ -1,0 +1,51 @@
+<div
+  class="node__content__container">
+
+  <app-loader [visible]="loading"></app-loader>
+
+  <div
+    class="node__content"
+    *ngIf="node.hasContent && content; else noContent"
+    [@fadeInOut]>
+    <ng-container
+      [ngSwitch]="viewerType">
+
+      <app-content-plain-text-viewer
+        *ngSwitchCase="ViewerType.PlainText"
+        [content]="content">
+      </app-content-plain-text-viewer>
+
+      <app-content-html-viewer
+        *ngSwitchCase="ViewerType.HTML"
+        [content]="content">
+      </app-content-html-viewer>
+
+      <app-content-image-viewer
+        *ngSwitchCase="ViewerType.Image"
+        [content]="content">
+      </app-content-image-viewer>
+
+      <div *ngSwitchDefault class="no__viewer__message__container">
+        <p class="text center no-wrap darkgray">
+          There is no viewer for corresponding file type
+        </p>
+      </div>
+
+    </ng-container>
+
+    <!-- Overlay to show over iframe during mouse events to prevent their interruption -->
+    <div class="iframe__overlay" *ngIf="nodeService.state.mouseEventActive">
+    </div>
+  </div>
+
+</div>
+
+<ng-template #noContent>
+
+  <div class="no__content__message__container">
+    <p class="text center no-wrap darkgray">
+      This node has no content
+    </p>
+  </div>
+
+</ng-template>

@@ -1,0 +1,20 @@
+{
+  "name": "@nihilsheji/app-auth-common",
+  "version": "1.0.0",
+  "description": "Api auth common package",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && tsc",
+    "prepublish": "npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/mongoose": "^9.0.1",
+    "@nestjs/passport": "^8.0.1",
+    "@nihilsheji/app-auth-common": "^1.0.0",
+    "passport-jwt": "^4.0.0"
+  }
+}

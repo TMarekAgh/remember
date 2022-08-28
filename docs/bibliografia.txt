@@ -1,0 +1,25 @@
+[1] https://aws.amazon.com/what-is-cloud-storage/
+[2] https://www.google.pl/intl/pl/drive/
+[3] https://www.dropbox.com/pl/
+[4] https://www.microsoft.com/pl-pl/microsoft-365/onedrive/online-cloud-storage
+[5] https://www.javatpoint.com/what-is-a-network-drive
+[6] https://www.atlassian.com/pl/software/confluence
+[7] https://azure.microsoft.com/pl-pl/services/devops/
+[8] https://obsidian.md/
+[9] https://www.ibm.com/pl-pl/cloud/learn/three-tier-architecture
+[10] https://nodejs.org/en/
+[11] https://nestjs.com/
+[12] https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
+[13] https://stackify.com/dependency-injection/
+[14] https://www.w3.org/International/questions/qa-i18n
+[15] Repozytorium projektu Electron, https://github.com/maximegris/angular-electron
+[16] https://www.typescriptlang.org/
+[17] Oficjalna strona biblioteki komponentów Material Angular, https://material.angular.io/
+[18] Oficjalna strona bazy danych MongoDB, MongoDBhttps://www.mongodb.com/
+[19] https://azure.microsoft.com/pl-pl/resources/cloud-computing-dictionary/what-is-nosql-database/
+[20] https://rxjs.dev/
+[21] https://jwt.io/
+[22] https://github.com/
+[23] https://www.ibm.com/pl-pl/cloud/learn/rest-apis
+[24] https://aws.amazon.com/caching/
+[25] https://www.techopedia.com/definition/3466/atomic-operation

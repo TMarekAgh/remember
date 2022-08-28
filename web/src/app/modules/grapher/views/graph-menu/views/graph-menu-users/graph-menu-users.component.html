@@ -1,0 +1,98 @@
+<div class="graph__users__container light">
+
+  <div class="nh-section-header">
+    <h2 class="nh-section-header-primary">Users</h2>
+  </div>
+
+  <div class="nh-search">
+
+    <div class="nh-search-container">
+      <mat-form-field
+        appearance="fill"
+        class="nh-search-input">
+
+        <mat-label>Search</mat-label>
+
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="filters.displayName"
+          (input)="searchInput($event)"
+          autocomplete="off"/>
+
+      </mat-form-field>
+
+      <div class="nh-search-actions">
+
+        <button
+          class="button-small"
+          mat-button
+          matTooltip="Apply Filters"
+          (click)="search()">
+
+          <mat-icon>
+            done
+          </mat-icon>
+
+        </button>
+
+        <button
+          class="button-small"
+          mat-button
+          matTooltip="Clear Filters"
+          (click)="clearFilters()">
+
+          <mat-icon>
+            remove
+          </mat-icon>
+
+        </button>
+
+      </div>
+    </div>
+
+    <div class="nh-search-results">
+
+      <ng-container *ngIf="searched.length > 0 && filterActive; else noneFound">
+        <div
+          class="nh-search-result"
+          *ngFor="let item of searched"
+          (click)="itemClicked(item)">
+          <p>{{ item.displayName }}</p>
+        </div>
+      </ng-container>
+
+    </div>
+
+  </div>
+
+  <div class="nh-list">
+    <ng-container *ngFor="let user of users">
+
+      <div class="nh-list-item">
+
+        <p class="nh-list-item-name">{{ user.displayName }}</p>
+
+        <button
+          class="button-small"
+          mat-button
+          matTooltip="Remove user"
+          (click)="removeClicked($event, user)">
+          <mat-icon>remove</mat-icon>
+        </button>
+
+      </div>
+
+      <mat-divider></mat-divider>
+
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #noneFound >
+  <div
+    *ngIf="filterActive"
+    class="nh-search-result no-hover">
+    <p>There are no users for current filters</p>
+  </div>
+</ng-template>

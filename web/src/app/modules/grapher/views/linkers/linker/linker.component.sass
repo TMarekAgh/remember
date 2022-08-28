@@ -1,0 +1,36 @@
+.linker__selected__item
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  p
+    margin: 0
+
+.linker__search__results
+  position: absolute
+  top: 100%
+  left: 0
+  background: #212121
+  color: #fafafa
+  border-radius: 5px
+  width: 100%
+  z-index: 20
+  overflow: hidden
+
+  &.static
+    position: relative
+    top: 0
+    left: 0
+
+.linker__search__result
+  padding: 10px 15px
+  cursor: pointer
+
+  &:hover
+    background: #424242
+
+  p
+    margin: 0
+
+.linker__search__container
+  position: relative

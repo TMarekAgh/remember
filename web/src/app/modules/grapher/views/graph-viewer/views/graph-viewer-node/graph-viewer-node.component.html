@@ -1,0 +1,96 @@
+<div
+  class="graph__viewer__node__container"
+  [class.filtered]="!item?.filtered ?? true && filter"
+  [class.position-transition]="positionTransition"
+  [class.no-transition]="noTransition"
+  [class.active]="active"
+  [style.left.px]="left"
+  [style.top.px]="top"
+  [style.width.px]="width"
+  [style.height.px]="height"
+  (click)="onNodeClick(item)"
+  (contextmenu)="showActions($event)"
+  (mouseleave)="hideActions()">
+
+  <svg class="node__background" viewBox="0 0 300 300">
+    <polygon class="hex" points="300,150 225,280 75,280 0,150 75,20 225,20"></polygon>
+  </svg>
+
+  <div class="node__content" [style]="'transform: scale(' + zoom + ')'">
+    <ng-container [ngTemplateOutlet]="customContent || defaultContent">
+    </ng-container>
+  </div>
+
+  <div
+    class="node__actions"
+    [style.transform]="'scale(' + zoom +')'"
+    *ngIf="actions && _showActions">
+
+    <div
+      class="node__action"
+      [style.top.px]="-120"
+      [style.left.px]="0">
+      <button mat-button (click)="actionClick($event, NodeAction.NodeDeleted)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+
+    <!-- <div
+      class="node__action"
+      [style.top.px]="-60"
+      [style.left.px]="100">
+      <button mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div
+      class="node__action"
+      [style.top.px]="60"
+      [style.left.px]="100">
+      <button mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div
+      class="node__action"
+      [style.top.px]="120"
+      [style.left.px]="0">
+      <button mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div
+      class="node__action"
+      [style.top.px]="60"
+      [style.left.px]="-100">
+      <button mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div
+      class="node__action"
+      [style.top.px]="-60"
+      [style.left.px]="-100">
+      <button mat-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div> -->
+
+  </div>
+</div>
+
+<ng-template #defaultContent>
+
+  <mat-icon class="node__icon">
+    {{ nodeTypeIconMap[item?.type] }}
+  </mat-icon>
+
+  <p class="node__name">
+    {{ item?.name }}
+  </p>
+
+</ng-template>

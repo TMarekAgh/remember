@@ -1,0 +1,155 @@
+<div mat-dialog-title class="nh-dialog-title">
+  <h1>
+    Edit Node
+  </h1>
+
+  <div mat-dialog-actions>
+
+    <button
+      mat-icon-button
+      (click)="edit()"
+      matTooltip="Confirm">
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      matTooltip="Cancel">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div mat-dialog-content class="dark">
+
+  <div>
+
+    <form [formGroup]="editNodeForm" class="nh-dialog-content grid">
+
+      <!-- <div class="nh-dialog-column flex column"> -->
+        <!-- Name -->
+        <mat-form-field class="nh-form-field">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="name"
+            autocomplete="off"/>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field class="nh-form-field">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <!-- Type -->
+        <div class="nh-form-field">
+          <mat-form-field>
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="0">File</mat-option>
+              <mat-option value="1">Container</mat-option>
+              <mat-option value="2">View</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <ng-container *ngIf="editNodeForm.get('type')?.value == 0">
+            <!-- Content Type -->
+            <mat-form-field>
+              <mat-label>Content Type</mat-label>
+              <mat-select formControlName="contentType">
+                <mat-option value="0">File</mat-option>
+                <mat-option value="1">Direct</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <ng-container *ngIf="editNodeForm.get('contentType')?.value == 0">
+              <div>
+                <!-- File -->
+                <label for="file" class="icon nh-margin-m-r">File</label>
+
+                <button
+                  type="button"
+                  mat-button
+                  (click)="fileInput.click()">
+                  {{ filename ? filename : 'Choose File' }}
+                </button>
+
+                <input
+                  #fileInput
+                  hidden
+                  formControlName="file"
+                  (change)="onFileSelected($event)"
+                  type="file"
+                  name="file"
+                  accept="html"
+                  id="file">
+              </div>
+
+            </ng-container>
+          </ng-container>
+        </div>
+
+      <!-- </div> -->
+
+      <!-- <div class="flex column nh-dialog-column"> -->
+
+        <div class="nh-form-field">
+          <h2>Parents</h2>
+
+          <app-node-linker
+            [selected]="parents"
+            (selectedChange)="onParentsChange($event)">
+          </app-node-linker>
+        </div>
+
+        <div class="nh-form-field">
+          <h2>Children</h2>
+
+          <app-node-linker
+            [selected]="children"
+            (selectedChange)="onChildrenChange($event)">
+          </app-node-linker>
+        </div>
+
+        <div class="nh-form-field">
+          <h2>Links</h2>
+
+          <app-node-linker
+            [selected]="links"
+            (selectedChange)="onLinksChange($event)">
+          </app-node-linker>
+        </div>
+
+      <!-- </div> -->
+
+      <!-- <div class="flex column nh-dialog-column"> -->
+
+        <div class="nh-form-field">
+          <h2>Tags</h2>
+
+          <app-tag-linker
+            [selected]="tags"
+            (selectedChange)="onTagsChange($event)">
+          </app-tag-linker>
+        </div>
+
+        <div class="nh-form-field">
+          <h2>Permissions</h2>
+
+          <app-user-linker
+            [selected]="allowedUsers"
+            (selectedChange)="onAllowedUsersChange($event)">
+          </app-user-linker>
+        </div>
+
+      <!-- </div> -->
+
+      <!-- <div class="flex column nh-dialog-column"></div> -->
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div  mat-dialog-title class="nh-dialog-title">
+  <h1>Add Children</h1>
+  <div mat-dialog-actions>
+
+    <button
+      mat-icon-button
+      (click)="accept()"
+      matTooltip="Add">
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      matTooltip="Cancel">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div mat-dialog-content class="nh-dialog-content">
+
+  <form class="flex column justify-evenly align-items-center">
+
+    <h2>Add Existing</h2>
+
+    <app-node-linker
+      style="width: 100%;"
+      [ignore]="existing"
+      [static]="true"
+      [selected]="existingChildren"
+      (selectedChange)="onExistingChildrenChange($event)">
+    </app-node-linker>
+
+    <h2 class="text center nh-margin-m-b">Or</h2>
+
+    <button
+      class="nh-card large center-margin"
+      mat-button
+      (click)="openAddChild()">
+      Create New
+    </button>
+
+  </form>
+</div>

@@ -1,0 +1,57 @@
+<div
+  class="node__view__container"
+  [@fadeInOut]
+  >
+  <!-- [@switchFade]="nodeChanged" -->
+  <app-loader [visible]="loading"></app-loader>
+
+  <ng-container *ngIf="!!_node; else noNode">
+
+
+    <ng-container *ngIf="!loading">
+
+    <div
+      *ngIf="!!view"
+      class="node__view__file">
+      <!-- [@fadeInOut] -->
+      <app-content-html-viewer
+        style="height: 100%; width: 100%"
+        [content]="view">
+      </app-content-html-viewer>
+    </div>
+
+
+    <!-- Overlay to show over iframe during mouse events to prevent their interruption -->
+    <div class="iframe__overlay" *ngIf="nodeService.state.mouseEventActive"></div>
+
+    <div
+    *ngIf="!view"
+    class="no__view__container">
+    <!-- [@fadeInOut] -->
+
+      <h1 class="nh-section-header">
+        {{ _node.name }}
+      </h1>
+
+      <div class="node__view__content">
+
+        <h2>Description</h2>
+
+        <ng-container *ngIf="!!node?.description">
+          <p>{{ _node.description }}</p>
+        </ng-container>
+
+        <ng-container *ngIf="!node?.description">
+          <p>This item has no description</p>
+        </ng-container>
+
+      </div>
+    </div>
+
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #noNode>
+  <p class="text center no-wrap darkgray">Click node to view its contents</p>
+</ng-template>

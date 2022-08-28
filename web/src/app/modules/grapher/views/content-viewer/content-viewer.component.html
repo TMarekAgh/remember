@@ -1,0 +1,233 @@
+<div class="content__viewer__container" [@initial]>
+
+  <div class="content__viewer">
+
+    <ng-container [ngSwitch]="currentSection">
+
+      <div
+        [@fadeInOut]
+        *ngSwitchCase="Section.View"
+        class="node__view__section">
+        <app-node-view
+          #nodeViewer
+          [node]="_node"
+          [hasView]="_node?.hasView ?? false">
+        </app-node-view>
+      </div>
+
+      <app-node-content
+        #contentViewer
+        [@fadeInOut]
+        *ngSwitchCase="Section.Content"
+        [node]="_node">
+      </app-node-content>
+
+      <div
+        [@fadeInOut]
+        *ngSwitchCase="Section.Settings"
+        class="node__settings__section">
+        <app-node-settings>
+        </app-node-settings>
+      </div>
+
+      <app-node-info
+        [@fadeInOut]
+        *ngSwitchCase="Section.Info"
+        [node]="_node">
+      </app-node-info>
+
+    </ng-container>
+  </div>
+
+  <div class="content__viewer__nav nh-menu column">
+
+    <button
+      mat-button
+      matTooltip="View"
+      matTooltipPosition="left"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.View"
+      (click)="setSection(Section.View)">
+      <mat-icon
+        class="icon">
+        panorama
+      </mat-icon>
+    </button>
+
+    <div
+      class="nh-submenu column"
+      [@foldInOutVertical]
+      *ngIf="currentSection == Section.View && nodeService.state.isOwner">
+
+      <button
+        mat-button
+        matTooltip="Add View"
+        matTooltipPosition="left"
+        class="nh-submenu-item"
+        *ngIf="!_node?.hasView"
+        (click)="addView()">
+        <mat-icon
+          class="icon">
+          add
+        </mat-icon>
+      </button>
+
+      <button
+        mat-button
+        matTooltip="Download View"
+        matTooltipPosition="left"
+        class="nh-submenu-item"
+        *ngIf="_node?.hasView"
+        (click)="downloadView()">
+        <mat-icon
+          class="icon">
+          file_download
+        </mat-icon>
+      </button>
+
+      <button
+        mat-button
+        matTooltip="Edit View"
+        matTooltipPosition="left"
+        class="nh-submenu-item"
+        *ngIf="_node?.hasView"
+        (click)="editView()">
+        <mat-icon
+          class="icon">
+          edit
+        </mat-icon>
+      </button>
+
+      <button
+        *ngIf="_node?.hasView"
+        mat-button
+        matTooltip="Upload View"
+        matTooltipPosition="left"
+        class="nh-submenu-item"
+        (click)="replaceView()">
+        <mat-icon
+          class="icon">
+          file_upload
+        </mat-icon>
+      </button>
+
+      <button
+        mat-button
+        matTooltip="Delete View"
+        matTooltipPosition="left"
+        class="nh-submenu-item"
+        *ngIf="_node?.hasView"
+        (click)="deleteView()">
+        <mat-icon
+          class="icon">
+          delete
+        </mat-icon>
+      </button>
+
+    </div>
+
+    <div [@foldInOutVertical] *ngIf="_node?.hasContent">
+      <button
+        mat-button
+        matTooltip="Content"
+        matTooltipPosition="left"
+        class="nh-menu-item"
+        [class.active]="currentSection == Section.Content"
+        (click)="setSection(Section.Content)">
+        <mat-icon
+          class="icon">
+          text_snippet
+        </mat-icon>
+      </button>
+
+      <div
+        class="nh-submenu column"
+        [@foldInOutVertical]
+        *ngIf="currentSection == Section.Content && nodeService.state.isOwner">
+
+        <button
+          *ngIf="node?.content"
+          mat-button
+          matTooltip="Download Content"
+          matTooltipPosition="left"
+          class="nh-submenu-item"
+          (click)="downloadContent()">
+          <mat-icon
+            class="icon">
+            file_download
+          </mat-icon>
+        </button>
+
+        <button
+          mat-button
+          matTooltip="Upload Content"
+          matTooltipPosition="left"
+          class="nh-submenu-item"
+          (click)="uploadContent()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
+
+        <button
+          *ngIf="node?.content"
+          mat-button
+          matTooltip="Delete Content"
+          matTooltipPosition="left"
+          class="nh-submenu-item"
+          (click)="deleteContent()">
+          <mat-icon class="icon">delete</mat-icon>
+        </button>
+
+      </div>
+    </div>
+
+    <button
+      *ngIf="nodeService.state.isOwner"
+      mat-button
+      matTooltip="Settings"
+      matTooltipPosition="left"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.Settings"
+      (click)="setSection(Section.Settings)">
+      <mat-icon class="icon">settings</mat-icon>
+    </button>
+
+    <div
+      class="nh-submenu column"
+      [@foldInOutVertical]
+      *ngIf="currentSection == Section.Settings && nodeService.state.isOwner">
+
+      <!-- Add to node -->
+      <!-- Edit node -->
+      <button
+        mat-button
+        matTooltip="Edit Node"
+        matTooltipPosition="left"
+        class="nh-submenu-item"
+        (click)="editNode()">
+        <mat-icon class="icon">edit</mat-icon>
+      </button>
+
+      <button
+        mat-button
+        matTooltip="Delete Node"
+        matTooltipPosition="left"
+        class="nh-submenu-item"
+        (click)="deleteNode()">
+        <mat-icon class="icon">delete</mat-icon>
+      </button>
+
+    </div>
+
+    <button
+      mat-button
+      matTooltip="Info"
+      matTooltipPosition="left"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.Info"
+      (click)="setSection(Section.Info)">
+      <mat-icon class="icon">info</mat-icon>
+    </button>
+
+  </div>
+
+</div>

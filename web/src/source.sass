@@ -1,0 +1,353 @@
+/* You can add global styles to this file, and also import other style files */
+@use "sass:map"
+@import ./app/modules/material/styles/overrides
+
+body, html
+  margin: 0
+  padding: 0
+
+.flex
+  display: flex
+
+  &.column
+    flex-direction: column
+
+  &.wrap
+    flex-wrap: wrap
+
+  &.justify-space-around
+    justify-content: space-around
+
+  &.justify-evenly
+    justify-content: space-evenly
+
+  &.justify-flex-start
+    justify-content: flex-start
+
+  &.align-items-start
+    align-items: flex-start
+
+  &.align-items-center
+    align-items: center
+
+*
+  box-sizing: border-box
+
+  ::-webkit-scrollbar
+    width: 10px
+    transition: all 0.25s
+
+  ::-webkit-scrollbar-track
+    background: #9e9e9e
+
+  ::-webkit-scrollbar-thumb
+    background: #212121
+    margin: 0px 1px
+
+    &:hover
+      color: #424242
+
+.nh-padding-m
+  padding: 10px
+
+.nh-padding-m-v
+  padding-top: 10px
+  padding-bottom: 10px
+
+.nh-padding-m-b
+  padding-bottom: 10px
+
+.nh-margin-m-v
+  margin-top: 10px
+  margin-bottom: 10px
+
+.nh-margin-m-r
+  margin-right: 10px
+
+.text
+
+  &.center
+    text-align: center
+
+  &.darkgray
+    color: #424242
+
+  &.no-margin
+    margin: 0
+
+  &.no-wrap
+    white-space: nowrap
+
+.dark
+  .text
+    &.darkgray
+      color: #bdbdbd
+
+  .mat-checkbox
+    .mat-checkbox-checkmark-path
+      stroke: #fafafa !important
+
+.header_primary
+  padding: 5px
+  background: #212121
+  color: #fafafa
+  margin: 0 !important
+
+.noselect
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+.snack__error
+  background: red
+  color: #fafafa
+
+.snack__success
+  background: darkgreen
+  color: #fafafa
+
+.snack__info
+  background: darkblue
+  color: #fafafa
+
+
+.nh-list
+  .nh-list-item
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 5px 10px
+
+    .nh-list-item-name
+      margin-bottom: 0
+
+.nh-search
+  position: relative
+
+  .nh-search-container
+    display: flex
+
+    .nh-search-actions
+      display: flex
+      align-items: center
+      padding-right: 5px
+
+    .nh-search-input
+      flex-grow: 1
+      border-radius: 5px
+      padding: 5px
+
+    .mat-form-field-wrapper
+      border-radius: 5px
+
+  .nh-search-results
+    background: #424242
+    color: #fafafa
+    border-radius: 5px
+    width: 100%
+    z-index: 20
+    position: absolute
+    left: 0
+    top: 100%
+
+    .nh-search-result
+      padding: 5px 10px
+
+      p
+        margin: 0
+
+  .mat-form-field-wrapper
+    padding-bottom: 0
+
+    .mat-form-field-underline
+      bottom: 0
+
+.nh-section-header
+  display: flex
+  background: #212121
+  color: #fafafa
+  justify-content: space-between
+  align-items: center
+  padding: 10px
+
+  .nh-section-header-primary
+    letter-spacing: 1px
+    margin: 0
+
+  .nh-section-header-actions
+    display: flex
+
+.mat-icon
+  &.icon-large
+    width: 40px
+    height: 40px
+    font-size: 2.5em
+
+.mat-button
+  &.button-small
+    width: 36px
+    height: 36px
+    padding: 0
+    min-width: unset
+
+  &.button-large
+    width: 36px
+    height: 36px
+    padding: 0
+    min-width: unset
+
+
+.nh-menu
+  height: 100%
+  display: flex
+
+  .nh-submenu
+    display: flex
+
+    &.column
+      flex-direction: column
+
+  &.column
+    flex-direction: column
+
+  .nh-menu-item
+    border-radius: 0
+    transition: all 0.1s
+
+    &.active
+      background: #212121
+      color: #fafafa
+
+  .nh-submenu-item
+    border-radius: 0
+    transition: all 0.1s
+    background: #bdbdbd
+
+    &.active
+      background: #212121
+      color: #fafafa
+
+  button
+    height: 60px
+
+
+
+.nh-card
+  padding: 10px 5px
+  background: #212121
+  color: #fafafa
+  border-radius: 5px
+  margin: 3px
+  width: 100px
+
+  &.large
+    width: 150px
+
+  &.mat-button
+    padding: 10px 5px
+    background: #212121
+    color: #fafafa
+    border-radius: 5px
+    margin: 3px
+    width: 100px
+
+    &.large
+      width: 150px
+
+
+  .nh-card-name
+    margin: 0
+    font-size: 0.75em
+    letter-spacing: 1px
+
+.default__image
+  max-width: 100%
+  margin: 0 auto
+  display: block
+
+.image__container
+  width: 100%
+
+.relative
+  position: relative
+
+.icon__inner
+  position: absolute
+  top: 50%,
+  left: 50%
+  transform: translate(-50%, -50%) scaleY(.8) scaleX(.5)
+  color: #212121
+
+.nh-dialog-title.mat-dialog-title
+  display: flex
+  justify-content: space-between
+  align-items: center
+  background: #212121
+  border-radius: 5px 5px 0 0
+  padding: 15px
+  margin-left: -24px
+  margin-top: -24px
+  margin-right: -24px
+  margin-bottom: 0
+
+
+  h1
+    margin: 0
+
+.nh-dialog-content
+  padding: 10px
+
+  &.static-height
+    height: calc(100% - 98px)
+
+  &.grid
+    column-width: 300px
+    column-gap: 10px
+    width: fit-content
+    margin: 0 auto
+
+.nh-dialog-content.mat-dialog-content
+  padding: 10px
+
+  &.static-height
+    height: calc(100% - 98px)
+
+  &.grid
+    column-width: 300px
+    column-gap: 10px
+    width: fit-content
+    margin: 0 auto
+
+.nh-dialog-column
+  background: #212121
+  border-radius: 15px
+  padding: 15px
+  min-width: 300px
+  max-width: 400px
+  width: 100%
+  flex-grow: 1
+  margin-bottom: 15px
+
+.nh-form-field
+  display: inline-block
+  border-radius: 10px
+  border: 2px solid #212121
+  padding: 10px
+  // min-width: 300px
+  // max-width: 400px
+  width: 100%
+  margin-bottom: 10px
+  margin-right: 10px
+  align-self: start
+
+  .mat-form-field
+    width: 100%
+
+.center-margin
+  margin: 0 auto !important
+
+.width-parent
+  width: 100%

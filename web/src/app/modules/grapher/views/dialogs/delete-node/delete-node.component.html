@@ -1,0 +1,54 @@
+<div  mat-dialog-title class="nh-dialog-title">
+  <h1>Delete Node</h1>
+  <div mat-dialog-actions>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      (click)="delete()"
+      matTooltip="Delete">
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      matTooltip="Cancel">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div mat-dialog-content class="nh-dialog-content dark">
+
+  <ng-container *ngIf="select">
+    <p>Select node to delete</p>
+    <app-node-selector></app-node-selector>
+  </ng-container>
+
+  <div class="flex column">
+    <mat-radio-group
+      class="flex column dark"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onOptionChanged($event)">
+
+      <mat-radio-button class="nh-padding-m-v"
+        [value]="1">
+        Delete Orphaned Children
+      </mat-radio-button>
+
+      <mat-radio-button class="nh-padding-m-v"
+        [value]="2">
+        Reattach Orphaned Children
+      </mat-radio-button>
+
+      <mat-radio-button class="nh-padding-m-v"
+        [value]="3">
+        Delete All Children
+      </mat-radio-button>
+
+    </mat-radio-group>
+
+  </div>
+</div>

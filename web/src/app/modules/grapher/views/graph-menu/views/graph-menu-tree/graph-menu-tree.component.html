@@ -1,0 +1,153 @@
+<div class="graph__menu__tree__container">
+
+  <div class="parents__section">
+
+    <div class="nh-section-header">
+
+      <h2 class="nh-section-header-primary">
+        Parents
+      </h2>
+
+      <div class="nh-section-header-actions" *ngIf="nodeService.state.isOwner">
+        <button
+          class="button-small"
+          mat-button
+          matTooltip="Add Parents"
+          (click)="actionClick($event, Section.Parents, Action.Add, node.id)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <div
+      class="nh-list light"
+      *ngIf="node.parents?.length ?? 0 > 0; else noParents">
+      <div
+        *ngFor="let node of node.parents"
+        (click)="itemClicked(node)"
+        class="nh-list-item section__item"
+        [class.active]="activeNode.id == node.id">
+
+        <p class="nh-list-item-name">{{ node.name }}</p>
+
+        <div class="nh-list-item-actions" *ngIf="nodeService.state.isOwner">
+
+          <button
+            class="button-small"
+            mat-button
+            matTooltip="Remove Parent"
+            (click)="actionClick($event, Section.Parents, Action.Delete, node.id)">
+            <mat-icon>remove</mat-icon>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="children__section">
+
+    <div class="nh-section-header">
+
+      <h2 class="nh-section-header-primary">
+        Children
+      </h2>
+
+      <div class="nh-section-header-actions" *ngIf="nodeService.state.isOwner">
+        <button
+          class="button-small"
+          mat-button
+          matTooltip="Add Children"
+          (click)="actionClick($event, Section.Children, Action.Add, node.id)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <div
+      class="nh-list light"
+      *ngIf="(node.children?.length ?? 0) > 0; else noChildren">
+
+      <div
+        *ngFor="let node of node.children"
+        (click)="itemClicked(node)"
+        class="nh-list-item section__item"
+        [class.active]="activeNode.id == node.id">
+
+        <p class="nh-list-item-name">{{ node.name }}</p>
+
+        <div class="nh-list-item-actions" *ngIf="nodeService.state.isOwner">
+
+          <button
+            class="button-small"
+            mat-button
+            matTooltip="Remove Child"
+            (click)="actionClick($event, Section.Children, Action.Delete, node.id)">
+            <mat-icon>remove</mat-icon>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="links__section">
+
+    <div class="nh-section-header">
+
+      <h2 class="nh-section-header-primary">Links</h2>
+
+      <div class="nh-section-header-actions" *ngIf="nodeService.state.isOwner">
+        <button
+          class="button-small"
+          mat-button
+          matTooltip="Add Links"
+          (click)="actionClick($event, Section.Links, Action.Add, node.id)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
+    <div
+      class="nh-list light"
+      *ngIf="(node.links?.length ?? 0) > 0; else noLinks">
+
+      <div
+        *ngFor="let node of node.links"
+        (click)="itemClicked(node)"
+        class="nh-list-item section__item"
+        [class.active]="activeNode.id == node.id">
+
+        <p class="nh-list-item-name">{{ node.name }}</p>
+
+        <div class="nh-list-item-actions" *ngIf="nodeService.state.isOwner">
+
+          <button
+            class="button-small"
+            mat-button
+            matTooltip="Remove Link"
+            (click)="actionClick($event, Section.Links, Action.Delete, node.id)">
+            <mat-icon>remove</mat-icon>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noParents>
+  <p class="text center no-wrap darkgray nh-padding-m no-margin">There are no parents</p>
+</ng-template>
+
+<ng-template #noChildren>
+  <p class="text center no-wrap darkgray nh-padding-m no-margin">There are no children</p>
+</ng-template>
+
+<ng-template #noLinks>
+  <p class="text center no-wrap darkgray nh-padding-m no-margin">There are no links</p>
+</ng-template>

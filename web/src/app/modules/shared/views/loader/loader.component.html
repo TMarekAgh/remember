@@ -1,0 +1,13 @@
+<div
+  class="light"
+  *ngIf="visible"
+  [@fadeInOut]
+  [class.fixed]="fixed"
+  [class.background]="background"
+  class="loader__container">
+  <mat-spinner
+    class="loader"
+    color="accent"
+    [mode]="'indeterminate'">
+  </mat-spinner>
+</div>

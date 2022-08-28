@@ -1,0 +1,35 @@
+<div mat-dialog-title class="nh-dialog-title">
+  <h1>
+    {{ title }}
+  </h1>
+
+  <div mat-dialog-actions>
+
+    <button
+      mat-icon-button
+      [mat-dialog-close]="url"
+      matTooltip="Add">
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      matTooltip="Cancel">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div mat-dialog-content class="nh-dialog-content">
+
+  <mat-form-field class="width-parent">
+    <mat-label>Image url</mat-label>
+    <input
+      matInput
+      [(ngModel)]="url"
+      autocomplete="off">
+  </mat-form-field>
+
+</div>

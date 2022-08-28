@@ -1,0 +1,14 @@
+{
+  "name": "@remember/api-common",
+  "version": "1.0.0",
+  "description": "Common package for Remember API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "clean": "tsc --build --clean",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomasz Marek",
+  "license": "ISC"
+}

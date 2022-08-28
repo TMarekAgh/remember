@@ -1,0 +1,308 @@
+<div
+  #container
+  class="graph__view__container noselect"
+  (wheel)="scrollZoom($event)"
+  (resize)="onResize()">
+
+  <ng-content></ng-content>
+
+  <div class="graph__view__options" style="z-index: 20">
+
+    <!-- Navigate back -->
+    <button
+      mat-button
+      matTooltip="Navigate to Previous"
+      (click)="navigatePrevious()"
+      [disabled]="!navigator.hasPrevious">
+      <mat-icon>
+        navigate_before
+      </mat-icon>
+    </button>
+
+    <!-- Navigate forward -->
+    <button
+      mat-button
+      matTooltip="Navigate to Next"
+      (click)="navigateNext()"
+      [disabled]="!navigator.hasNext">
+      <mat-icon>
+        navigate_next
+      </mat-icon>
+    </button>
+
+    <div class="graph__view__filters__container">
+
+      <button
+        mat-button
+        matTooltip="View Filters"
+        class="relative"
+        (click)="toggleOpenFilters()">
+
+        <mat-icon>filter_alt</mat-icon>
+
+        <mat-icon
+          *ngIf="filter"
+          class="icon__inner">
+          filter_alt
+        </mat-icon>
+
+      </button>
+
+      <div
+        class="graph__view__filters"
+        *ngIf="filtersOpened"
+        [@foldInOutVertical]>
+
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="viewFilters.name"
+            autocomplete="off"/>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="viewFilters.description"
+            autocomplete="off"/>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select [(ngModel)]="viewFilters.type">
+            <mat-option value="">Select type</mat-option>
+            <mat-option value="1">Container</mat-option>
+            <mat-option value="2">File</mat-option>
+            <mat-option value="3">View</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="graph__view__filter__actions">
+
+          <button
+            mat-button
+            matTooltip="Apply Filters"
+            (click)="applyViewFilters()">
+            <mat-icon>done</mat-icon>
+          </button>
+
+          <button
+            mat-button
+            matTooltip="Clear Filters"
+            (click)="clearViewFilters()">
+            <mat-icon>clear</mat-icon>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <button
+      mat-button
+      matTooltip="Zoom In"
+      (click)="increaseZoom()"
+      [disabled]="isMaxZoom">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button
+      mat-button
+      matTooltip="Zoom Out"
+      (click)="decreaseZoom()"
+      [disabled]="isMinZoom">
+      <mat-icon>remove</mat-icon>
+    </button>
+
+  </div>
+
+  <!-- <ng-container *ngFor="let section of sectionsArray">
+    <svg class="graph__view__background">
+      <polygon [attr.points]="section.svgPoints" [attr.style]="section.svgStyle"/>
+    </svg>
+  </ng-container> -->
+
+  <div
+    #graphView
+    class="graph__view"
+    [style.width.px]="totalSpace * zoom"
+    [style.height.px]="totalSpace * zoom"
+    [style.top]="'calc(50% - ' + windowOffsetTop + 'px)'"
+    [style.left]="'calc(50% - ' + windowOffsetLeft + 'px)'"
+    [class.no-transition]="!!tempElement"
+    (mousedown)="mouseDown($event)"
+    (mousemove)="mouseMove($event)"
+    (mouseup)="mouseUp($event)">
+
+    <ng-container
+      *ngFor="let section of sectionsArray"
+      >
+      <!-- [@currentNodeChange]="_node" -->
+
+      <div
+        class="section__label"
+        [class.no-transition]="!!tempElement"
+        [style.top.px]="section.labelPoint.position.y * zoom"
+        [style.left.px]="section.labelPoint.position.x * zoom"
+        [style.transform]="' translate(-50%, -50%) rotate(' + section.middleAngle + 'deg) scale(' + 2 * zoom + ')'">
+        <p [style.transform]="">{{ section.name }}</p>
+      </div>
+
+      <!-- [style.transform]="'scale(' + 2 * zoom + ')'" -->
+      <!-- viewBox="0 0 100 100" -->
+      <svg class="graph__view__background">
+        <!-- <polygon
+          class="transition"
+          [attr.points]="section.svgPoints"
+          [attr.style]="section.svgStyle"/>
+
+        <line
+          class="transition"
+          [attr.x1]="section.leftCorner.x * zoom"
+          [attr.x2]="centralNode.position.x * zoom"
+          [attr.y1]="section.leftCorner.y * zoom"
+          [attr.y2]="centralNode.position.y * zoom"
+          stroke="black"/>
+
+        <line
+          class="transition"
+          [attr.x1]="section.rightCorner.x * zoom"
+          [attr.x2]="centralNode.position.x * zoom"
+          [attr.y1]="section.rightCorner.y * zoom"
+          [attr.y2]="centralNode.position.y * zoom"
+          stroke="black"/> -->
+
+        <!-- <circle class="circle"
+          [attr.cx]="section.leftCurvePoint.x * zoom"
+          [attr.cy]="section.leftCurvePoint.y * zoom"
+          r="1"
+          stroke="black"
+          fill="black"/>
+
+        <circle class="circle"
+          [attr.cx]="section.rightCurvePoint.x * zoom"
+          [attr.cy]="section.rightCurvePoint.y * zoom"
+          r="1"
+          stroke="black"
+          fill="black"/>
+
+        <circle class="circle"
+          [attr.cx]="section.curveBase.x * zoom"
+          [attr.cy]="section.curveBase.y * zoom"
+          r="1"
+          stroke="red"
+          fill="red"/> -->
+
+        <!-- <ng-container *ngFor="let item of section.items">
+          <path [attr.d]="item.line.svgPosition" stroke="black" fill="none"/>
+
+          <circle
+            class="circle"
+            [attr.cx]="item.line.start.x * zoom"
+            [attr.cy]="item.line.start.y * zoom"
+            r="1"
+            stroke="red"
+            fill="red"/>
+
+          <circle
+            class="circle"
+            [attr.cx]="item.line.end.x * zoom"
+            [attr.cy]="item.line.end.y * zoom"
+            r="1"
+            stroke="red"
+            fill="red"/>
+
+          <circle
+            class="circle"
+            [attr.cx]="item.line.middle.x * zoom"
+            [attr.cy]="item.line.middle.y * zoom"
+            r="1"
+            stroke="red"
+            fill="red"/>
+
+        </ng-container> -->
+      </svg>
+
+      <div>
+        <!-- [@itemsChanged]="staggerItems ? 'hiding' : 'showing'" -->
+        <ng-container *ngFor="let item of section.items">
+
+          <app-graph-viewer-node
+            [@.disabled]="lastClicked == item"
+            *ngIf="!tempElement"
+            class="view__node secondary"
+            [@fadeInOut]
+            [noTransition]="!!tempElement || noTransition"
+            (click)="onNodeClick(item)"
+            (nodeAction)="nodeAction($event, section.type)"
+            [item]="item"
+            [active]="item.id == activeNode.id"
+            [left]="item.position.x * zoom"
+            [top]="item.position.y * zoom"
+            [width]="itemWidth * zoom"
+            [height]="itemHeight * zoom"
+            [filter]="filter"
+            [zoom]="zoom">
+          </app-graph-viewer-node>
+
+        </ng-container>
+      </div>
+
+      <app-graph-viewer-node
+        [@fadeInOut]
+        *ngIf="!tempElement && nodeService.state.isOwner"
+        class="view__node secondary"
+        (click)="onAddNodeClick(section)"
+        [noTransition]="!!tempElement || noTransition"
+        [left]="section.addItem.position.x * zoom"
+        [top]="section.addItem.position.y * zoom"
+        [width]="itemWidth * zoom"
+        [height]="itemHeight * zoom"
+        [filter]="filter"
+        [zoom]="zoom"
+        [actions]="false">
+        <ng-template #customContent>
+          <p class="node__name" >
+            <mat-icon>add</mat-icon>
+          </p>
+        </ng-template>
+      </app-graph-viewer-node>
+
+    </ng-container>
+
+    <app-graph-viewer-node
+      [@fadeInOut]
+      class="view__node"
+      [noTransition]="!!tempElement || noTransition"
+      [item]="node"
+      [active]="node?.id == activeNode?.id"
+      (click)="onNodeClick(node)"
+      [left]="centralNode.position.x * zoom"
+      [top]="centralNode.position.y * zoom"
+      [width]="itemWidth * zoom"
+      [height]="itemHeight * zoom"
+      [zoom]="zoom"
+      [filter]="filter"
+      [actions]="false">
+    </app-graph-viewer-node>
+
+    <app-graph-viewer-node
+      *ngIf="tempElement"
+      class="view__node temp__current__node"
+      [positionTransition]="tempPositionTransition"
+      [noTransition]="!tempElementTransition"
+      [item]="tempElement"
+      [active]="true"
+      [left]="tempElement.position.x * zoom"
+      [top]="tempElement.position.y * zoom"
+      [width]="itemWidth * zoom"
+      [height]="itemHeight * zoom"
+      [zoom]="zoom"
+      [filter]="filter">
+    </app-graph-viewer-node>
+
+  </div>
+</div>

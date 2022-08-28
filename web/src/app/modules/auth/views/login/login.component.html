@@ -1,0 +1,50 @@
+<div class="container">
+
+  <mat-card class="login__container nh-padding-m">
+
+    <mat-card-title class="text center nh-padding-m">Sign in</mat-card-title>
+
+    <mat-card-content>
+
+      <form class="flex column" [formGroup]="loginForm">
+
+        <mat-form-field class="block nh-padding-m-b">
+          <mat-label>Login</mat-label>
+
+          <input
+            matInput
+            type="text"
+            formControlName="username"
+            autocomplete="off"/>
+
+        </mat-form-field>
+
+        <mat-form-field class="block nh-padding-m-b">
+          <mat-label>Password</mat-label>
+
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            autocomplete="off"/>
+
+        </mat-form-field>
+
+        <button
+          mat-button
+          class="block"
+          (click)="login()"
+          [disabled]="!loginForm.valid">
+          Sign in
+        </button>
+
+        <button mat-button [routerLink]="'/auth/register'">
+          Don't have an account? Sign up
+        </button>
+
+      </form>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>

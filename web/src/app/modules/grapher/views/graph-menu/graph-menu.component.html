@@ -1,0 +1,109 @@
+<div class="graph__menu__container">
+
+  <div class="graph__menu__nav nh-menu column">
+
+    <button
+      mat-button
+      matTooltip="Tree View"
+      matTooltipPosition="right"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.Tree"
+      (click)="toggleSection(Section.Tree)">
+      <mat-icon>account_tree</mat-icon>
+    </button>
+
+    <button
+      mat-button
+      matTooltip="Search"
+      matTooltipPosition="right"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.Search"
+      (click)="toggleSection(Section.Search)">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <button
+      mat-button
+      matTooltip="Tools"
+      matTooltipPosition="right"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.Tools"
+      (click)="toggleSection(Section.Tools)">
+      <mat-icon>build</mat-icon>
+    </button>
+
+    <button
+      mat-button
+      matTooltip="Tags"
+      matTooltipPosition="right"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.Tags"
+      (click)="toggleSection(Section.Tags)">
+      <mat-icon>label</mat-icon>
+    </button>
+
+    <button
+      mat-button
+      matTooltip="Users"
+      matTooltipPosition="right"
+      class="nh-menu-item"
+      [class.active]="currentSection == Section.Users"
+      (click)="toggleSection(Section.Users)">
+      <mat-icon>people</mat-icon>
+    </button>
+
+  </div>
+
+  <div *ngIf="!!node; else nodeLoading" class="graph__menu__content">
+
+    <ng-container [ngSwitch]="currentSection">
+
+      <div
+        [@fadeInOut]
+        *ngSwitchCase="Section.Tree">
+        <app-graph-menu-tree
+          [node]="node"
+          [activeNode]="activeNode"
+          (onItemClicked)="navigateToNode($event)"
+          (onAction)="onNodeAction($event)">
+        </app-graph-menu-tree>
+      </div>
+
+      <div
+        [@fadeInOut]
+        *ngSwitchCase="Section.Search">
+        <app-graph-menu-search
+          (onAction)="onNodeAction($event)">
+        </app-graph-menu-search>
+      </div>
+
+      <div
+        [@fadeInOut]
+        *ngSwitchCase="Section.Tools">
+        <app-graph-menu-tools>
+        </app-graph-menu-tools>
+      </div>
+
+      <div
+        [@fadeInOut]
+        *ngSwitchCase="Section.Tags">
+        <app-graph-menu-tags>
+        </app-graph-menu-tags>
+      </div>
+
+      <div
+        [@fadeInOut]
+        *ngSwitchCase="Section.Users">
+        <app-graph-menu-users>
+        </app-graph-menu-users>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</div>
+
+<ng-template #nodeLoading>
+  <!-- <app-loader></app-loader> -->
+</ng-template>

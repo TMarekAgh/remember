@@ -1,0 +1,34 @@
+<div class="graph__tools__container">
+
+  <div class="nh-section-header">
+    <h2 class="nh-section-header-primary">Tools</h2>
+  </div>
+
+  <div class="tools__container">
+
+    <button
+      class="nh-card tool__button"
+      mat-button
+      (click)="addNode()">
+      <mat-icon class="icon-large">add</mat-icon>
+      <p class="nh-card-name">Add Node</p>
+    </button>
+
+    <button
+      class="nh-card tool__button"
+      mat-button
+      (click)="deleteNode()">
+      <mat-icon class="icon-large">remove</mat-icon>
+      <p class="nh-card-name">Delete Node</p>
+    </button>
+
+    <button
+      class="nh-card tool__button"
+      mat-button
+      (click)="editNode()">
+      <mat-icon class="icon-large">edit</mat-icon>
+      <p class="nh-card-name">Edit Node</p>
+    </button>
+
+  </div>
+</div>

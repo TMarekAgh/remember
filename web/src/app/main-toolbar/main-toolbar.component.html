@@ -1,0 +1,59 @@
+<mat-toolbar class="main__toolbar">
+
+  <button
+    matTooltip="Modules"
+    [routerLink]="'/hub'"
+    mat-icon-button>
+    <mat-icon>apps</mat-icon>
+  </button>
+
+  <h2 class="main__app__name">REMEMBER</h2>
+
+  <div class="main__toolbar__right">
+
+    <ng-container *ngIf="!authService.isLoggedIn">
+
+      <button mat-button [routerLink]="'auth/login'">
+        Sign In
+      </button>
+
+      <button mat-button [routerLink]="'auth/register'">
+        Sign Up
+      </button>
+
+    </ng-container>
+
+    <ng-container *ngIf="authService.isLoggedIn">
+
+      <div class="main__toolbar__account">
+
+        <button
+          matTooltip="Account"
+          mat-icon-button
+          (click)="toggleAccountPanel()">
+          <mat-icon>person</mat-icon>
+        </button>
+
+        <mat-card *ngIf="accountPanelOpen" class="main__toolbar__account__panel">
+
+          <button mat-button>
+            Account
+          </button>
+
+          <button mat-button>
+            Settings
+          </button>
+
+          <button mat-button (click)="logout()">
+            Log Out
+          </button>
+
+        </mat-card>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</mat-toolbar>

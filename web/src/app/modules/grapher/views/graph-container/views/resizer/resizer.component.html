@@ -1,0 +1,40 @@
+<div class="resizer__container">
+
+  <div
+    #resizer
+    class="resizer"
+    (mousedown)="startDrag($event)"
+    [class.right]="position == ResizerPosition.Right"
+    [class.left]="position == ResizerPosition.Left">
+  </div>
+
+  <div class="resizer__actions">
+
+    <button
+      class="resizer__action left"
+      (click)="toggleStep()"
+      mat-button
+      *ngIf="left; else pad">
+      <mat-icon class="resizer__action__icon">
+        {{ toggle ? currentStep == steps ? 'navigate_next' : 'navigate_before' : 'navigate_before' }}
+      </mat-icon>
+    </button>
+
+    <button
+      class="resizer__action right"
+      (click)="toggleStep()"
+      mat-button
+      *ngIf="right; else pad">
+      <mat-icon class="resizer__action__icon">
+        {{ toggle ? currentStep == steps ? 'navigate_before' : 'navigate_next' : 'navigate_next' }}
+      </mat-icon>
+    </button>
+
+  </div>
+
+
+</div>
+
+<ng-template #pad>
+  <div class="resizer__action__pad"></div>
+</ng-template>

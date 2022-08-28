@@ -1,0 +1,95 @@
+.graph__viewer__node__container
+  position: absolute
+  color: #fafafa
+  transform: translate(-50%, -50%)
+  transform-origin: center
+  display: flex
+  justify-items: center
+  align-items: center
+  z-index: 10
+  cursor: pointer
+  transition: background 0.5s
+
+  &.no-transition
+    transition: none
+
+  &.position-transition
+    transition: top 0.5s, left 0.5s
+
+  &.filtered
+    opacity: 0.5
+
+  .node__background
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    transition: fill 0.25s ease-out
+
+  .node__content
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    transition: transform 0.5s
+    font-smooth: subpixel-antialiased
+
+  .node__name
+    text-align: center
+    width: 100%
+    margin: 0
+
+  .node__icon
+    margin: 5px
+
+  &.active
+    color: #212121
+
+    .node__background
+      fill: #fafafa
+      stroke: #212121
+      stroke-width: 5px
+
+    &:hover
+      .node__background
+        fill: #e0e0e0
+        stroke: #212121
+        stroke-width: 5px
+
+  .node__actions
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 0
+    height: 0
+    transform: translate(-50%, -50%)
+
+    .node__action
+      width: auto
+      height: 40px
+      position: absolute
+      transform: translate(-50%, -50%)
+      background: #212121
+      color: #fafafa
+      border-radius: 5px
+      z-index: 25
+
+      button
+        padding: 0
+
+  &:hover
+    .node__background
+      fill: #424242
+      stroke: #212121
+      stroke-width: 5px
+
+  .node__overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    border-radius: 50%

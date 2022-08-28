@@ -1,0 +1,142 @@
+<div class="graph__menu__search__container light">
+
+  <div class="graph__menu__search">
+    <div class="nh-section-header">
+
+      <h2 class="nh-section-header-primary">
+        Search
+      </h2>
+
+      <div class="nh-section-header-actions">
+        <button
+          class="button-small"
+          mat-button
+          [matTooltip]="searchExpanded ? 'Expand' : 'Shrink'"
+          (click)="toggleSearchExpanded()">
+          <mat-icon>
+            {{ searchExpanded ? 'expand_less' : 'expand_more' }}
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div
+      [@foldInOutVertical]
+      class="graph__menu__search__content"
+      *ngIf="searchExpanded">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="filters.name"
+          autocomplete="off"/>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="filters.description"
+          autocomplete="off"/>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="filters.type">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option value="1">Container</mat-option>
+          <mat-option value="2">File</mat-option>
+          <mat-option value="3">View</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Owner</mat-label>
+        <mat-select [(ngModel)]="filters.user">
+          <mat-option
+            *ngFor="let user of users"
+            [value]="user._id">
+            {{ user.displayName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Tag</mat-label>
+        <mat-select [(ngModel)]="filters.tag">
+          <mat-option
+            *ngFor="let tag of tags"
+            [value]="tag._id">
+            {{ tag.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="search__actions">
+
+        <button mat-button matTooltip="Apply Filters">
+          <mat-icon (click)="search()">done</mat-icon>
+        </button>
+
+        <button mat-button matTooltip="Clear Filters">
+          <mat-icon (click)="clearFilters()">remove</mat-icon>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="nh-list" *ngIf="!!searchedNodes; else noSearched">
+    <ng-container *ngIf="searchedNodes.length > 0; else noNodesFound">
+      <ng-container *ngFor="let node of searchedNodes">
+
+        <div class="nh-list-item" >
+
+          <p class="nh-list-item-name">{{ node.name }}</p>
+
+          <div class="nh-list-item-actions">
+
+            <button
+              class="button-small"
+              mat-button
+              matTooltip="Preview Node"
+              matTooltipPosition="left"
+              (click)="action($event, NodeAction.Preview, node)">
+              <mat-icon>search</mat-icon>
+            </button>
+
+            <button
+              class="button-small"
+              mat-button
+              matTooltip="Navigate to Node"
+              matTooltipPosition="right"
+              (click)="action($event, NodeAction.Navigate, node)">
+              <mat-icon>double_arrow</mat-icon>
+            </button>
+
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #noNodesFound>
+  <p class="text center no-wrap darkgray nh-padding-m no-margin">No nodes were found</p>
+</ng-template>
+
+<ng-template #noSearched>
+  <p class="text center no-wrap darkgray nh-padding-m no-margin">Apply filters to find nodes</p>
+</ng-template>

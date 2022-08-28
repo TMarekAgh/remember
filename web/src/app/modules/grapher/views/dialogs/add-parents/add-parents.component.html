@@ -1,0 +1,38 @@
+<div mat-dialog-title class="nh-dialog-title">
+  <h1>
+    Add Parents
+  </h1>
+
+  <div mat-dialog-actions>
+
+    <button
+      mat-icon-button
+      (click)="accept()"
+      matTooltip="Add">
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      matTooltip="Cancel">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div mat-dialog-content class="nh-dialog-content">
+
+  <form class="flex column">
+
+    <app-node-linker
+      [selected]="parents"
+      [ignore]="existing"
+      [static]="true"
+      (selectedChange)="onParentsChange($event)">
+    </app-node-linker>
+
+  </form>
+
+</div>

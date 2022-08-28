@@ -1,0 +1,47 @@
+<div class="linker__container">
+
+  <div class="linker__search__container">
+
+    <mat-form-field class="width-parent">
+      <mat-label>Search</mat-label>
+
+      <input
+        matInput
+        type="text"
+        [value]="filter"
+        (input)="valueChange($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        autocomplete="off"/>
+
+    </mat-form-field>
+
+    <div class="linker__search__results" [class.static]="static">
+      <div
+        class="linker__search__result"
+        *ngFor="let item of searched"
+        (click)="itemClicked(item)">
+        <p>{{ getItemName(item) }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 *ngIf="_selected.length > 0">Selected</h3>
+
+  <div class="linker__selected__container">
+
+    <ng-container *ngFor="let item of _selected">
+
+      <div class="linker__selected__item">
+        <p>{{ getItemName(item) }}</p>
+        <button
+          mat-button
+          (click)="removeSelected(item)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+
+    </ng-container>
+
+  </div>
+</div>

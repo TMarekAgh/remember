@@ -1,0 +1,37 @@
+<div mat-dialog-title class="nh-dialog-title">
+  <h1>
+    Add Tags
+  </h1>
+
+  <div mat-dialog-actions>
+
+    <button
+      mat-icon-button
+      (click)="accept()"
+      matTooltip="Add">
+      <mat-icon>done</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      mat-dialog-close=""
+      matTooltip="Cancel">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</div>
+
+<div mat-dialog-content>
+
+  <form class="flex column">
+
+    <app-tag-linker
+      [selected]="tags"
+      [static]="true"
+      (selectedChange)="onTagsChange($event)">
+    </app-tag-linker>
+
+  </form>
+
+</div>

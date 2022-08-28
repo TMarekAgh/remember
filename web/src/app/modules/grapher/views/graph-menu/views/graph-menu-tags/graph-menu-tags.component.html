@@ -1,0 +1,116 @@
+<div class="graph__tags__container light">
+
+  <div class="nh-section-header">
+    <h2 class="nh-section-header-primary">Tags</h2>
+  </div>
+
+  <div class="nh-search">
+
+    <div class="nh-search-container">
+
+      <mat-form-field
+        appearance="fill"
+        class="nh-search-input">
+
+        <mat-label>Search</mat-label>
+
+        <input
+          matInput
+          type="text"
+          autocomplete="off"
+          [(ngModel)]="filters.name"
+          (ngModelChange)="searchChanged($event)"
+          autocomplete="off"/>
+
+      </mat-form-field>
+
+      <div class="nh-search-actions">
+
+        <button
+          class="button-small"
+          mat-button
+          matTooltip="Add tag"
+          (click)="addTag()"
+          [disabled]="!canCreate">
+          <mat-icon>add</mat-icon>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="nh-list" *ngIf="!!tags; else noTags">
+
+    <ng-container *ngVar="tags | filter:filterSearched as filtered">
+      <ng-container *ngIf="filtered.length > 0; else noFound">
+        <ng-container *ngFor="let tag of filtered">
+
+          <div class="nh-list-item">
+
+            <ng-container *ngIf="!tag.editing">
+
+              <p class="nh-list-item-name">{{ tag.name }}</p>
+
+              <div class="nh-list-item-actions">
+                <button
+                  class="button-small"
+                  mat-button
+                  matTooltip="Edit tag"
+                  (click)="startEditing(tag)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button
+                  class="button-small"
+                  mat-button
+                  matTooltip="Remove tag"
+                  (click)="removeTag(tag._id)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="tag.editing">
+
+              <mat-form-field>
+                <input matInput type="text" [(ngModel)]="editing[tag._id]"/>
+              </mat-form-field>
+
+              <div class="nh-list-item-actions">
+                <button
+                  class="button-small"
+                  mat-button
+                  matTooltip="Edit tag"
+                  (click)="editTag(tag)">
+                  <mat-icon>done</mat-icon>
+                </button>
+
+                <button
+                  class="button-small"
+                  mat-button
+                  matTooltip="Stop editing"
+                  (click)="stopEditing(tag)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </div>
+
+            </ng-container>
+
+          </div>
+
+          <mat-divider></mat-divider>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #noTags>
+  <p class="text center no-wrap darkgray no-margin nh-padding-m">There are no tags</p>
+</ng-template>
+
+<ng-template #noFound>
+  <p class="text center no-wrap darkgray no-margin nh-padding-m">No tags found</p>
+</ng-template>

@@ -1,0 +1,85 @@
+<div class="node__info__container" [@switchFade]="nodeChanged">
+
+  <ng-container *ngIf="node">
+
+    <div class="nh-section-header">
+      <h3 class="nh-section-header-primary">Name</h3>
+    </div>
+    <p class="node__info__value">
+      {{ node.name }}
+    </p>
+
+    <div class="nh-section-header">
+      <h3 class="nh-section-header-primary">Description</h3>
+    </div>
+    <p class="node__info__value">
+      {{ node.description }}
+    </p>
+
+    <div class="nh-section-header">
+      <h3 class="nh-section-header-primary">Type</h3>
+    </div>
+    <p class="node__info__value">
+      {{ nodeTypeMap[node.type] }}
+    </p>
+
+    <div class="nh-section-header">
+      <h3 class="nh-section-header-primary">Tags</h3>
+    </div>
+    <div class="node__info__tags">
+      <ng-container *ngIf="tags.length > 0; else noTags">
+        <p class="node__info__value" *ngFor="let tag of tags">
+          {{ tag.name }}
+        </p>
+      </ng-container>
+    </div>
+
+    <div class="nh-section-header">
+      <h3 class="nh-section-header-primary">Allowed Users</h3>
+    </div>
+    <div class="node__info__users">
+      <ng-container *ngIf="allowedUsers.length > 0; else noUsers">
+        <p class="node__info__value" *ngFor="let user of allowedUsers">
+          {{ user.displayName }}
+        </p>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="!!node.contentType">
+      <div class="nh-section-header">
+        <h3 class="nh-section-header-primary">Content Type</h3>
+      </div>
+      <p class="node__info__value">
+        {{ nodeContentTypeMap[node.contentType] }}
+      </p>
+    </ng-container>
+
+    <ng-container *ngIf="!!node.contentData">
+      <div class="nh-section-header">
+        <h3 class="nh-section-header-primary">Content Data</h3>
+      </div>
+      <h5>Type</h5>
+      <p class="node__info__value">
+        {{ node.contentData.type }}
+      </p>
+    </ng-container>
+  </ng-container>
+
+</div>
+
+
+<!-- Add things like when was create, last modified, by whom etc. -->
+<ng-template #noUsers>
+  <p class="text darkgray node__info__value">
+    This node has no allowed users
+  </p>
+</ng-template>
+
+<ng-template #noTags>
+  <p class="text darkgray node__info__value">
+    This node has no tags
+  </p>
+</ng-template>
+
+<ng-template #loader>
+</ng-template>

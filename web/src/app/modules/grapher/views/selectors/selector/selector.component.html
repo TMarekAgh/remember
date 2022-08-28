@@ -1,0 +1,26 @@
+<div class="selector__container">
+
+  <div class="selector__search__container">
+
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+
+      <input
+        matInput
+        type="text"
+        [value]="search"
+        (input)="valueChange($event)"
+        autocomplete="off"/>
+
+    </mat-form-field>
+
+    <div class="selector__search__results">
+      <div
+        class="selector__search__result"
+        *ngFor="let item of searched"
+        (click)="itemClicked(item)">
+        <p>{{ getItemName(item) }}</p>
+      </div>
+    </div>
+  </div>
+</div>
