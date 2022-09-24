@@ -261,13 +261,13 @@ export class GraphViewerComponent implements OnInit, AfterViewInit {
     //Base of 60deg per section, then give space based on number of elements
 
     this.sections = {
-      ["children"]: {
-        name: "Children",
-        count: childrenCount,
-        type: SectionType.Children,
-        // angle: this.anglePerItem * (childrenCount + 1),
+      ["parents"]: {
+        name: "Parents",
+        count: parentsCount,
+        type: SectionType.Parents,
+        // angle: this.anglePerItem * (parentsCount + 1),
         angle: 120,
-        items: this.node.children.map(x => ({ ...x })) as any[],
+        items: this.node.parents.map(x => ({ ...x })) as any[],
         topWidth: 0,
         points: [],
         svgPoints: '',
@@ -285,13 +285,13 @@ export class GraphViewerComponent implements OnInit, AfterViewInit {
         addItem: { position: { x: 0, y: 0} },
         labelPoint: { position: { x: 0, y: 0 } }
       },
-      ["parents"]: {
-        name: "Parents",
-        count: parentsCount,
-        type: SectionType.Parents,
-        // angle: this.anglePerItem * (parentsCount + 1),
+      ["children"]: {
+        name: "Children",
+        count: childrenCount,
+        type: SectionType.Children,
+        // angle: this.anglePerItem * (childrenCount + 1),
         angle: 120,
-        items: this.node.parents.map(x => ({ ...x })) as any[],
+        items: this.node.children.map(x => ({ ...x })) as any[],
         topWidth: 0,
         points: [],
         svgPoints: '',
